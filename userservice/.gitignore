@@ -5,8 +5,7 @@ target/
 !**/src/test/**/target/
 
 ### Ignore application.yml in userservice ###
-userservice/src/main/resources/application.yml
-activityservice/src/main/resources/application.yml
+**/src/main/resources/*.yml
 
 ### STS ###
 .apt_generated
