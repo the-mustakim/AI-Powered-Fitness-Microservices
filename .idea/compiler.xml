@@ -16,13 +16,24 @@
         </processorPath>
         <module name="userservice" />
       </profile>
+      <profile name="Annotation profile for activityService" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath>
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
+        </processorPath>
+        <module name="activityService" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="activityService" target="17" />
       <module name="userservice" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="activityService" options="-parameters" />
       <module name="userservice" options="-parameters" />
     </option>
   </component>
