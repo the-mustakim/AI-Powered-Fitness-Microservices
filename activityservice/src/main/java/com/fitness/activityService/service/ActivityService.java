@@ -17,8 +17,15 @@ import java.util.stream.Collectors;
 public class ActivityService {
 
     private final ActivityRespository activityRepository;
+    private final UserValidateService userValidateService;
 
     public ActivityResponce trackActivity(ActivityRequest request) {
+        //Here before we will going to store the user in the database, we have to validate the user exist or not, by calling the user-service
+
+        boolean isValidUser = userValidateService.validateUser(request.getUserId());
+        if(!isValidUser){
+            throw new RuntimeException("Invalid User: " + request.getUserId());
+        }
         Activity activity = Activity.builder()
                 .userId(request.getUserId())
                 .type(request.getType())

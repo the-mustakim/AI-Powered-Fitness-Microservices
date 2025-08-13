@@ -4,10 +4,12 @@ import com.fitnessapp.userservice.dto.RegisterRequest;
 import com.fitnessapp.userservice.dto.UserResponce;
 import com.fitnessapp.userservice.model.User;
 import com.fitnessapp.userservice.respository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public class UserService {
 
     @Autowired
@@ -48,5 +50,10 @@ public class UserService {
         userResponce.setCreatedAt(user.getCreatedAt());
         userResponce.setUpdatedAt(user.getUpdatedAt());
         return userResponce;
+    }
+
+    public Boolean existByUserId(String userId) {
+        log.info("Calling User Validation API for userId: {}", userId);
+        return userRepository.existsById(userId);
     }
 }
