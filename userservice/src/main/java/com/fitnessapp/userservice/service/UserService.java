@@ -17,18 +17,30 @@ public class UserService {
     public UserResponce register(RegisterRequest request) {
 
         if(userRepository.existsByEmail(request.getEmail())){
-            throw new RuntimeException("Email already exist");
+            User existingUser = userRepository.findByEmail(request.getEmail());
+            UserResponce userResponce = new UserResponce();
+            userResponce.setId(existingUser.getId());
+            userResponce.setKeyClockId(existingUser.getKeyClockId());
+            userResponce.setEmail(existingUser.getEmail());
+            userResponce.setFirstName(existingUser.getFirstName());
+            userResponce.setLastName(existingUser.getLastName());
+            userResponce.setPassword(existingUser.getPassword());
+            userResponce.setCreatedAt(existingUser.getCreatedAt());
+            userResponce.setUpdatedAt(existingUser.getUpdatedAt());
+            return userResponce;
         }
 
         User user = new User();
+        user.setKeyClockId(request.getKeyClockId());
         user.setEmail(request.getEmail());
         user.setPassword(request.getPassword());
         user.setFirstName(request.getFirstName());
         user.setLastName(request.getLastName());
-        User savedUser = userRepository.saveAndFlush(user);
 
+        User savedUser = userRepository.saveAndFlush(user);
         UserResponce userResponce = new UserResponce();
         userResponce.setId(savedUser.getId());
+        userResponce.setKeyClockId(savedUser.getKeyClockId());
         userResponce.setEmail(savedUser.getEmail());
         userResponce.setFirstName(savedUser.getFirstName());
         userResponce.setLastName(savedUser.getLastName());
@@ -43,6 +55,7 @@ public class UserService {
 
         UserResponce userResponce = new UserResponce();
         userResponce.setId(user.getId());
+        userResponce.setKeyClockId(user.getKeyClockId());
         userResponce.setEmail(user.getEmail());
         userResponce.setFirstName(user.getFirstName());
         userResponce.setLastName(user.getLastName());
@@ -54,6 +67,6 @@ public class UserService {
 
     public Boolean existByUserId(String userId) {
         log.info("Calling User Validation API for userId: {}", userId);
-        return userRepository.existsById(userId);
+        return userRepository.existsByKeyClockId(userId);
     }
 }

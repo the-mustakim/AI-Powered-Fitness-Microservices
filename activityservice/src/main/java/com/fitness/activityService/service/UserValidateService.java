@@ -24,6 +24,7 @@ public class UserValidateService {
                     .bodyToMono(Boolean.class)//Maps the HTTP response body to a Mono<Boolean> — this is reactive, so it represents a value that will be available in the future
                     .block(); //Waits for the Mono<Boolean> to complete and returns the Boolean result directly.
         }catch (WebClientResponseException e){
+            e.printStackTrace();
             if(e.getStatusCode() == HttpStatus.NOT_FOUND){
                 throw new RuntimeException("User Not Found: " + userId);
             }

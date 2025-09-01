@@ -4,12 +4,14 @@ import com.fitnessapp.userservice.dto.RegisterRequest;
 import com.fitnessapp.userservice.dto.UserResponce;
 import com.fitnessapp.userservice.service.UserService;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/users")
+@Slf4j
 public class UserController {
 
     @Autowired
